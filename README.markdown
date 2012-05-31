@@ -12,7 +12,7 @@ Register objects and classes like so:
       s.Person = function () {
         this.greet = function () {
           alert('hello');
-        }
+        };
       };
     });
 
