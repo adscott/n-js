@@ -1,9 +1,11 @@
 var n = function (nsString, register) {
-  var build = function (root, packageNames) {
-    var current = packageNames.shift();
-    root[current] = root[current] || {};
-    return packageNames.length > 0 ? build(root[current], packageNames) : root[current];
-  };
-
-  register(build(window, nsString.split('.')));
+    var current = window || global;
+    var pieces = nsString.split('.');
+    
+    for (var i = 0; i < pieces.length; i++) {
+        current[pieces[i]] = current[pieces[i]] || {};
+        current = current[pieces[i]];
+    }
+    
+    register(current);
 };
